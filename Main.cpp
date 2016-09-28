@@ -6,6 +6,7 @@ int main()
 {
 
 	std::cout << "\n\n<<<	--	Welcomen to the DesignMontören	--	>>>>\n" << std::endl;
+	std::cout << "Designmontören can make singleton templates:" << std::endl;
 	std::cout << "1 - c++ file" << std::endl;
 	std::cout << "2 - c# file" << std::endl;
 	std::cout << "3 - nothing" << std::endl;

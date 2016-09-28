@@ -5,18 +5,36 @@ File* FileFactory::TestFile(int type)
 {	
 	if (type == 1)
 	{
-		File* file = new File("cpp");
 
 		// write some shitty test-file
-		std::ofstream myfile("/files/example." + file->GetExtension());
-		//myfile.open("/files/example." + file->GetExtension());
-		myfile << "#include <iostream>";
-		myfile << "\nclass Nothing {}";
-		myfile.close();
+		File* file = new File("h");
 
-		// MoveFile("/files/example." + file->GetExtension());
+		std::ofstream myFile("Files//Nothing." + file->GetExtension(), std::ios::out | std::ios::in | std::ios::trunc);
+		myFile << "Nothing* Nothing::m_instance = nullptr;";
+		myFile.close();
+		delete file;
 
-		system("explorer E:\\C++Proj\\FUCpp1\\FUCpp1\\files");
+
+		file = new File("cpp");
+		std::ofstream otherFile("Files//Nothing." + file->GetExtension(), std::ios::out | std::ios::in | std::ios::trunc);
+		otherFile << "\nclass Nothing";
+		otherFile << "\n{";
+		otherFile << "\npublic:";
+		otherFile << "\n	static Nothing* GetInstance()";
+		otherFile << "\n	{";
+		otherFile << "\n		if (m_instance != nullptr)";
+		otherFile << "\n		{";
+		otherFile << "\n			m_instance = new Nothing();";
+		otherFile << "\n		}";
+		otherFile << "\n		return m_instance";
+		otherFile << "\n	}";
+		otherFile << "\n	~Nothing();";
+		otherFile << "\nprivate:";
+		otherFile << "\n	Nothing m_nothing";
+		otherFile << "\n	";
+		otherFile << "\n}";
+		otherFile.close();
+
 		return file;
 	}
 
@@ -25,13 +43,22 @@ File* FileFactory::TestFile(int type)
 		File* file = new File("cs");
 
 		// write some shitty test-file
-		std::ofstream myfile("example." + file->GetExtension(), std::ios::out | std::ios::in | std::ios::trunc);
-		//myfile.open("/files/example." + file->GetExtension());
-		myfile << "using System.collections";
-		myfile << "\npublic class Nothing {}";
-		myfile.close();
+		std::ofstream myFile("Files//example." + file->GetExtension(), std::ios::out | std::ios::in | std::ios::trunc);
+		myFile << "using System;\n";
+		myFile << "\npublic class Nothing {";
+		myFile << "\n	private static Nothing m_instance;\n";
+		myFile << "\n	private Nothing();\n";
+		myFile << "\n	public static Singleton GetInstance() {";
+		myFile << "\n		get {";
+		myFile << "\n			if (m_instance != null) {";
+		myFile << "\n				m_instance = new Nothing();";
+		myFile << "\n			}";
+		myFile << "\n			return m_instance;";
+		myFile << "\n		}";
+		myFile << "\n	}";
+		myFile << "\n}";
+		myFile.close();
 
-		system("explorer E:\\C++Proj\\FUCpp1\\FUCpp1\\files");
 		return file;
 	}
 
